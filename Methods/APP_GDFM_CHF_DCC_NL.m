@@ -5,10 +5,12 @@ clear all
 clc
 warning off
 
-addpath(genpath('/home/alunos/10/ra109078/QuEST_v027'))
-addpath(genpath('/home/alunos/10/ra109078/DCC_NL06'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM_MC/MFE'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM_VaR'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/QuEST_v027'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/DCC_NL06'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/mfe-toolbox-master'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/aux_functions'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Data'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Methods'))
 
 data = importdata('retornos_APP3_matlab.txt');
 
@@ -43,7 +45,7 @@ for l = 1:WR
     [chi, CL, v] = fhlz_nstd_p(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
     idioest = datatemp(k+1:end,:)-chi;
         
-    [~, H_one] = DCC_full(v);
+    [~, H_one] = DCC_full_normal(v);  % DCC_full(v)
     Hidio = DCCcov_fore(idioest,0);
     
     Haux = CL(:,:,1)*H_one*CL(:,:,1)'+Hidio;
@@ -51,7 +53,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal.txt', 'sigma_full', '-ASCII');
 
 
 
