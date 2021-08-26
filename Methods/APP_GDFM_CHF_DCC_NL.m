@@ -5,12 +5,12 @@ clear all
 clc
 warning off
 
-addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/QuEST_v027'))
-addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/DCC_NL06'))
-addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/mfe-toolbox-master'))
-addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/aux_functions'))
-addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Data'))
-addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Methods'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/QuEST_v027'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/DCC_NL06'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/mfe-toolbox-master'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/aux_functions'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/Data'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/Methods'))
 
 data = importdata('retornos_APP3_matlab.txt');
 
@@ -33,6 +33,9 @@ q = q_aux(2);
 % end numbers of common shocks
 
 for l = 1:WR
+    %rand('state',l);
+    %randn('state',l);
+    %unifrnd('state',l);
     AUX_data = data(l:l+750-1,:);
     datatemp = bsxfun(@minus,AUX_data,mean(AUX_data));
     display(['Estimation GDFM_CHF_DCC_NL APP3 ',num2str(l),' out of ',num2str(WR)])
@@ -53,7 +56,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal2.txt', 'sigma_full', '-ASCII');
 
 
 
