@@ -5,21 +5,12 @@ clear all
 clc
 warning off
 
-<<<<<<< HEAD
-addpath(genpath('/home/ctruciosm/GDFM-CHF/QuEST_v027'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/DCC_NL06'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/mfe-toolbox-master'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/aux_functions'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/Data'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/Methods'))
-=======
 addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/QuEST_v027'))
 addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/DCC_NL06'))
 addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/mfe-toolbox-master'))
 addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/aux_functions'))
 addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Data'))
 addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Methods'))
->>>>>>> 395c147b975544c6b07eab18ca77ba89bdc85a0d
 
 data = importdata('retornos_APP3_matlab.txt');
 
@@ -42,15 +33,9 @@ q = q_aux(2);
 % end numbers of common shocks
 
 for l = 1:WR
-<<<<<<< HEAD
-    %rand('state',l);
-    %randn('state',l);
-    %unifrnd('state',l);
-=======
     randn('state',l);
     rand('state',l);
     unifrnd('state',l);
->>>>>>> 395c147b975544c6b07eab18ca77ba89bdc85a0d
     AUX_data = data(l:l+750-1,:);
     datatemp = bsxfun(@minus,AUX_data,mean(AUX_data));
     display(['Estimation GDFM_CHF_DCC_NL APP3 ',num2str(l),' out of ',num2str(WR)])
@@ -60,7 +45,7 @@ for l = 1:WR
     k = 1;                  % Lags for the VAR
     nrepli = 30;            % number os permutations
     
-    [chi, CL, v] = fhlz_nstd_p(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
+    [chi, CL, v] = fhlz_nstd_p_bic(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
     idioest = datatemp(k+1:end,:)-chi;
         
     [~, H_one] = DCC_full_normal(v);  % DCC_full(v)
@@ -71,7 +56,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal2.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal_bic.txt', 'sigma_full', '-ASCII');
 
 
 
