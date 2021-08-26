@@ -4,15 +4,9 @@
 
 library(Rsolnp)
 library(data.table)
-<<<<<<< HEAD
 source("/home/ctruciosm/GDFM-CHF/optim.mvp.bounded.R")
 retornos = read.table("/home/ctruciosm/GDFM-CHF/Data/retornos_APP3.txt",sep=" ",head=TRUE)
 Ht = fread("/home/ctruciosm/H_GDFM_CHF_DCC_NL_normal.txt",header=FALSE)
-=======
-source("optim.mvp.bounded.R")
-retornos = read.table("/home/alunos/10/ra109078/GDFM-CHF/Data/retornos_APP3.txt",sep=" ",head=TRUE)
-Ht = fread("H_GDFM_CHF_DCC_NL_normal.txt",header=FALSE)
->>>>>>> 395c147b975544c6b07eab18ca77ba89bdc85a0d
 Ht = as.matrix(Ht)
 
 
