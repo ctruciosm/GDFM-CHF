@@ -5,8 +5,8 @@
 library(Rsolnp)
 library(data.table)
 source("optim.mvp.bounded.R")
-retornos = read.table("retornos_APP3.txt",sep=" ",head=TRUE)
-Ht = fread("H_GDFM_CHF_DCC_NL.txt",header=FALSE)
+retornos = read.table("/home/alunos/10/ra109078/GDFM-CHF/Data/retornos_APP3.txt",sep=" ",head=TRUE)
+Ht = fread("H_GDFM_CHF_DCC_NL_normal.txt",header=FALSE)
 Ht = as.matrix(Ht)
 
 
@@ -38,26 +38,26 @@ RO_RM  = AV_RM/sqrt(252*mean(S_RM))
 ResultsAnn = matrix(c(AV_RM,SD_RM,IR_RM,RO_RM))
 round(ResultsAnn,4)
 
-write.csv(r_RM_c,"OoSp_GDFM_CHF_DCC_NL.csv")
+write.csv(r_RM_c,"OoSp_GDFM_CHF_DCC_NL_normal.csv")
 
 
-GDFM_CHF_DCC_NL <- read.csv("OoSp_GDFM_CHF_DCC_NL.csv")[,-1]
-PCA_MGARCH_DCC_N <- read.csv("OoSp_H_PCA_MGARCH_DCC_NL.csv")[,-1]
+#GDFM_CHF_DCC_NL <- read.csv("OoSp_GDFM_CHF_DCC_NL.csv")[,-1]
+#PCA_MGARCH_DCC_N <- read.csv("OoSp_H_PCA_MGARCH_DCC_NL.csv")[,-1]
 
-OoS_GDFM_PCA <- data.frame(GDFM = GDFM_CHF_DCC_NL, PCA = PCA_MGARCH_DCC_N)
-write.csv(OoS_GDFM_PCA,"OoS_GDFM_PCA.csv")
+#OoS_GDFM_PCA <- data.frame(GDFM = GDFM_CHF_DCC_NL, PCA = PCA_MGARCH_DCC_N)
+#write.csv(OoS_GDFM_PCA,"OoS_GDFM_PCA.csv")
 
-GDFM_CHF_DCC_NL <- read.csv("OoSp_GDFM_CHF_DCC_NL.csv")[,-1]
-DCC_NL <- read.csv("OoSp_DCC_NL.csv")[,-1]
+#GDFM_CHF_DCC_NL <- read.csv("OoSp_GDFM_CHF_DCC_NL.csv")[,-1]
+#DCC_NL <- read.csv("OoSp_DCC_NL.csv")[,-1]
 
-OoS_GDFM_DCCNL <- data.frame(GDFM = GDFM_CHF_DCC_NL, DCCNL = DCC_NL)
-write.csv(OoS_GDFM_DCCNL,"OoS_GDFM_DCCNL.csv")
+#OoS_GDFM_DCCNL <- data.frame(GDFM = GDFM_CHF_DCC_NL, DCCNL = DCC_NL)
+#write.csv(OoS_GDFM_DCCNL,"OoS_GDFM_DCCNL.csv")
 
-GDFM_CHF_DCC_NL <- read.csv("OoSp_GDFM_CHF_DCC_NL.csv")[,-1]
-AFM_DCC_NL <- read.csv("OoSp_AFM_DCC_NL.csv")[,-1]
+#GDFM_CHF_DCC_NL <- read.csv("OoSp_GDFM_CHF_DCC_NL.csv")[,-1]
+#AFM_DCC_NL <- read.csv("OoSp_AFM_DCC_NL.csv")[,-1]
 
-OoS_GDFM_AFMDCCNL <- data.frame(GDFM = GDFM_CHF_DCC_NL, AFMDCCNL = AFM_DCC_NL)
-write.csv(OoS_GDFM_AFMDCCNL,"OoS_GDFM_AFMDCCNL.csv")
+#OoS_GDFM_AFMDCCNL <- data.frame(GDFM = GDFM_CHF_DCC_NL, AFMDCCNL = AFM_DCC_NL)
+#write.csv(OoS_GDFM_AFMDCCNL,"OoS_GDFM_AFMDCCNL.csv")
 
 
 

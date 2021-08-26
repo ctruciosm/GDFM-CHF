@@ -45,7 +45,7 @@ for l = 1:WR
     k = 1;                  % Lags for the VAR
     nrepli = 30;            % number os permutations
     
-    [chi, CL, v] = fhlz_nstd_p(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
+    [chi, CL, v] = fhlz_nstd_p_bic(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
     idioest = datatemp(k+1:end,:)-chi;
         
     [~, H_one] = DCC_full_normal(v);  % DCC_full(v)
@@ -56,7 +56,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal_bic.txt', 'sigma_full', '-ASCII');
 
 
 
