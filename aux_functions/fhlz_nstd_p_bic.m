@@ -45,8 +45,8 @@ for h = 1:nrepli
     end    
     x = z(:,riord);                                                         % permuto le variabili
     covmatrix = covmat(riord,riord,:);                                      % Permutation of the covariance matrix;    
-    kk = irfbic(covmatrix,q,k,T);    
-    [HL GL GL1 y]=StaticRepresentation(x,covmatrix,qq,m,nlagsimp,T,kk,H);        % Estimation of H(L) - G(L)=inv(H(L)) - w(t)
+    kk = irfbic(covmatrix,q,k,T);
+    [HL GL GL1 y]=StaticRepresentationbic(x,covmatrix,qq,m,nlagsimp,T,kk,H);        % Estimation of H(L) - G(L)=inv(H(L)) - w(t)
     S = diag(std(y)); yy = ML_center(y)*(S^-1);  %Para garantir condicoes do Theorema B in Forni (2015)
     yy1 = ML_center(y);
     eta(:,:,h)=yy1;
@@ -122,10 +122,20 @@ for mm = 1:m;
 end
 end
 %%% =================================================================== %%%
+%%% =================================================================== %%%
+function [HL GL GL1 w]=StaticRepresentationbic(x,covmatrix,qq,m,nlagsimp,T,k,H);
 
-%%% =================================================================== %%%
-%%% =================================================================== %%%
- 
+GL = zeros(qq*m,qq*m,nlagsimp); HL = zeros(qq*m,qq*m,k+1); w = zeros(T-k,qq*m);
+
+for mm = 1:m;                
+    [C CC B u]=VARcov(x,covmatrix,T,k(mm),qq,mm,H,nlagsimp);                    % Estimation of Aj(L) - Gj(L) - vj(t)    
+    HL((mm-1)*qq+1:qq*mm,(mm-1)*qq+1:qq*mm,:)=CC;                           % Building the H(L) Matrix
+    w(:,(mm-1)*qq+1:qq*mm) = u;                                             % Residual w(t)   
+    GL((mm-1)*qq+1:qq*mm,(mm-1)*qq+1:qq*mm,:)=B;                            % Building G(L)=inv(H(L))
+    GL1((mm-1)*qq+1:qq*mm,(mm-1)*qq+1:qq*mm,:)=inv(sum(CC,3));              % long run impact matrix   
+end
+end
+%%% =================================================================== %%% 
 % VARcov estimate a VAR from autocovariance of the variables
 % C - autoregressive coefficients 
 % B - Moving average Represetation
