@@ -43,7 +43,7 @@ for l = 1:WR
     
     K = 10;                 % Lag B(L)
     m = floor(sqrt(T));     % Lag Spectral density matrix
-    k = 1;                  % Lags for the VAR
+    k = 10;                 % max Lags for the VAR
     nrepli = 30;            % number os permutations
     
     [chi, CL, v] = fhlz_nstd_p_bic(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);

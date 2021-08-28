@@ -12,10 +12,12 @@
 %                                   if C(L) is zeroless
 %           Aj(L)*chi(t)=Rj*vj(t) for j=1:m
 %
-%X= r(1:end-1,:);
+%
+%X= datatemp(1:end,:);
 %qq = q+1;
 %w = m;
 %nlagsimp = K;
+%qq = q+1;
 %idvar=1:q;
 %nrepli=30;
 function [cstar,CL,v,C1,eta1,Rfinal,ufinal] = fhlz_nstd_p_bic(X,qq,k,w,nlagsimp,idvar,nrepli)
@@ -43,8 +45,8 @@ for h = 1:nrepli
     end    
     x = z(:,riord);                                                         % permuto le variabili
     covmatrix = covmat(riord,riord,:);                                      % Permutation of the covariance matrix;    
-    kk = irfbic(covmatrix,q,k,T);
-    [HL GL GL1 y]=StaticRepresentation(x,covmatrix,qq,m,nlagsimp,T,kk(1),H);        % Estimation of H(L) - G(L)=inv(H(L)) - w(t)
+    kk = irfbic(covmatrix,q,k,T);    
+    [HL GL GL1 y]=StaticRepresentation(x,covmatrix,qq,m,nlagsimp,T,kk,H);        % Estimation of H(L) - G(L)=inv(H(L)) - w(t)
     S = diag(std(y)); yy = ML_center(y)*(S^-1);  %Para garantir condicoes do Theorema B in Forni (2015)
     yy1 = ML_center(y);
     eta(:,:,h)=yy1;
