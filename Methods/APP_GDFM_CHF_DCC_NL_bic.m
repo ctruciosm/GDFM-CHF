@@ -13,6 +13,13 @@ addpath(genpath('/home/ctruciosm/GDFM-CHF/Data'))
 addpath(genpath('/home/ctruciosm/GDFM-CHF/Methods'))
 
 
+%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/QuEST_v027'))
+%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/DCC_NL06'))
+%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/mfe-toolbox-master'))
+%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/aux_functions'))
+%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Data'))
+%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Methods'))
+
 data = importdata('retornos_APP3_matlab.txt');
 
 [T N] = size(data);
