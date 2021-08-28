@@ -5,12 +5,13 @@ clear all
 clc
 warning off
 
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/QuEST_v027'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/DCC_NL06'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/mfe-toolbox-master'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/aux_functions'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Data'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Methods'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/QuEST_v027'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/DCC_NL06'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/mfe-toolbox-master'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/aux_functions'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/Data'))
+addpath(genpath('/home/ctruciosm/GDFM-CHF/Methods'))
+
 
 data = importdata('retornos_APP3_matlab.txt');
 
