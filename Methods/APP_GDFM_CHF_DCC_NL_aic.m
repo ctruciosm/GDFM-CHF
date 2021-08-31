@@ -50,7 +50,7 @@ for l = 1:WR
     
     K = 10;                 % Lag B(L)
     m = floor(sqrt(T));     % Lag Spectral density matrix
-    k = 5;                 % max Lags for the VAR
+    k = 5;                  % max Lags for the VAR
     nrepli = 30;            % number os permutations
     
     [chi, CL, v] = fhlz_nstd_p_bic(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
@@ -64,7 +64,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal_bic.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal_aic.txt', 'sigma_full', '-ASCII');
 
 
 

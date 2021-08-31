@@ -1,9 +1,10 @@
-function [bic, hq] = irfbic(covmatrix, q, K, T)
+function [bic, aic, hq] = irfbic(covmatrix, q, K, T)
 [n, ~, ~] = size(covmatrix);
 qq = q  + 1;
 s = floor(n/qq);
 bic = zeros(s,K);
-hq = bic;
+aic = zeros(s,K);
+hq  = zeros(s,K);
  for k = 1:K
      for ss = 1:s-1
 % compute relevant variances and covariances
@@ -14,6 +15,7 @@ C = A\B;
 Ss = A(1:qq, 1:qq) - B'*C;
 % compute the bic 
 bic(ss,k) = log(det(Ss)) + (qq^2*k)*log(T)/T;
+aic(ss,k) = log(det(Ss)) + (1/T)*2*k*qq^2;
 hq(ss,k) = log(det(Ss)) + (qq^2*k+qq)*2*log(log(T))/T;
      end
 a = qq*(s-1);
@@ -27,5 +29,6 @@ hq(s,k) = log(det(Ss)) + (nlast^2*k+nlast)*2*log(log(T))/T;
  end
 % minimize bic and cbic 
  [~, bic] = min(bic,[],2);
+ [~, aic] = min(aic,[],2);
  [~, hq] = min(hq,[],2);
 end
