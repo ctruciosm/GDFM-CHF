@@ -1,3 +1,5 @@
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 %%%% Unconditional Covariance matrix with non-linear shrinkage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,15 +31,11 @@ WR = L - 750;
 
 sigma_full = zeros(WR,N*N);
 
-% Number of common shocks in the first panel
-AUX_data = data(1:1+W-1,:);
-mu = mean(AUX_data);
-datatemp = bsxfun(@minus,AUX_data,mu);
-
-q_max = 10;
+q_max = 10; 
 nmin = round(3*N/4);
 q_aux = HL2(datatemp,q_max,2,nmin,'p1')
 q = q_aux(2);
+    
 % end numbers of common shocks
 
 for l = 1:WR
@@ -46,11 +44,12 @@ for l = 1:WR
     unifrnd('state',l);
     AUX_data = data(l:l+750-1,:);
     datatemp = bsxfun(@minus,AUX_data,mean(AUX_data));
+    
     display(['Estimation GDFM_CHF_DCC_NL APP3 ',num2str(l),' out of ',num2str(WR)])
     
-    K = 10;                 % Lag B(L)
+    K = 30;                 % Lag B(L)
     m = floor(sqrt(T));     % Lag Spectral density matrix
-    k = 5;                  % max Lags for the VAR
+    k = 7;                  % max Lags for the VAR
     nrepli = 30;            % number os permutations
     
     [chi, CL, v] = fhlz_nstd_p_bic(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
@@ -64,10 +63,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal_aic.txt', 'sigma_full', '-ASCII');
-
-
-
+save('H_GDFM_CHF_DCC_NL_normal_bic_q.txt', 'sigma_full', '-ASCII');
 
 
 

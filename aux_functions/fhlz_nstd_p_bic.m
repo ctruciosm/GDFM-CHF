@@ -42,7 +42,7 @@ for h = 1:nrepli
     x = z(:,riord);                                                         
     covmatrix = covmat(riord,riord,:);                                         
     [kkbic, kkaic, kkhq] = irfbic(covmatrix,q,k,T);
-    [HL GL GL1 y]=StaticRepresentationbic(x,covmatrix,qq,m,nlagsimp,T,kkaic,H);     
+    [HL GL GL1 y]=StaticRepresentationbic(x,covmatrix,qq,m,nlagsimp,T,kkbic,H);     
     S = diag(std(y)); yy = ML_center(y)*(S^-1);  
     opt.disp = 0; 
     [V, MM] = eigs(cov(yy), q,'LM',opt);                                   
