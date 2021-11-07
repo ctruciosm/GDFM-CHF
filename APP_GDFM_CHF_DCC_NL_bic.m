@@ -7,12 +7,12 @@ clear all
 clc
 warning off
 
-addpath(genpath('/home/ctruciosm/GDFM-CHF/QuEST_v027'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/DCC_NL06'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/mfe-toolbox-master'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/aux_functions'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/Data'))
-addpath(genpath('/home/ctruciosm/GDFM-CHF/Methods'))
+addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/QuEST_v027'))
+addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/DCC_NL06'))
+addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/mfe-toolbox-master'))
+addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/aux_functions'))
+addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Data'))
+%addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Methods'))
 
 
 %addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/QuEST_v027'))
@@ -31,31 +31,37 @@ WR = L - 750;
 
 sigma_full = zeros(WR,N*N);
 
+l = 1;
+AUX_data = data(l:l+750-1,:);
+datatemp = bsxfun(@minus,AUX_data,mean(AUX_data));
+
+[T N] = size(datatemp);
 q_max = 10; 
 nmin = round(3*N/4);
 q_aux = HL2(datatemp,q_max,2,nmin,'p1')
-q = q_aux(2);
-    
+q = q_aux(2);    
 % end numbers of common shocks
+K = 10;                 % Lag B(L)
+k = 5;                  % max Lags for the VAR
+m = floor(sqrt(T));     % Lag Spectral density matrix
+nrepli = 30;            % number os permutations
+
 
 for l = 1:WR
     randn('state',l);
     rand('state',l);
     unifrnd('state',l);
+
     AUX_data = data(l:l+750-1,:);
     datatemp = bsxfun(@minus,AUX_data,mean(AUX_data));
-    
+
     display(['Estimation GDFM_CHF_DCC_NL APP3 ',num2str(l),' out of ',num2str(WR)])
-    
-    K = 30;                 % Lag B(L)
-    m = floor(sqrt(T));     % Lag Spectral density matrix
-    k = 7;                  % max Lags for the VAR
-    nrepli = 30;            % number os permutations
+
     
     [chi, CL, v] = fhlz_nstd_p_bic(datatemp(1:end,:),q+1,k,m,K,1:q,nrepli);
     idioest = datatemp(k+1:end,:)-chi;
         
-    [~, H_one] = DCC_full_normal(v);  % DCC_full(v)
+    [~, H_one] = DCC_full_normal(v);  
     Hidio = DCCcov_fore(idioest,0);
     
     Haux = CL(:,:,1)*H_one*CL(:,:,1)'+Hidio;
@@ -63,7 +69,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal_bic_q.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal_bic_teste.txt', 'sigma_full', '-ASCII');
 
 
 
