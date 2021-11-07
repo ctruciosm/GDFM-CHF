@@ -7,20 +7,12 @@ clear all
 clc
 warning off
 
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/QuEST_v027'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/DCC_NL06'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/mfe-toolbox-master'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/aux_functions'))
-addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Data'))
-%addpath(genpath('/home/alunos/10/ra109078/GDFM-CHF/Methods'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/QuEST_v027'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/DCC_NL06'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/mfe-toolbox-master'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/aux_functions'))
+addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Data'))
 
-
-%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/QuEST_v027'))
-%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/DCC_NL06'))
-%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/mfe-toolbox-master'))
-%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/aux_functions'))
-%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Data'))
-%addpath(genpath('/Users/ctruciosm/Desktop/GDFM-CHF/Methods'))
 
 data = importdata('retornos_APP3_matlab.txt');
 
@@ -69,7 +61,7 @@ for l = 1:WR
     sigma_full(l,:) = Hone(:);
 end
           
-save('H_GDFM_CHF_DCC_NL_normal_bic_teste.txt', 'sigma_full', '-ASCII');
+save('H_GDFM_CHF_DCC_NL_normal_bic.txt', 'sigma_full', '-ASCII');
 
 
 
